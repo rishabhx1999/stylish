@@ -11,11 +11,11 @@ class OnBoardingPageView extends StatelessWidget {
   String image;
 
   OnBoardingPageView({
-    Key? key,
+    super.key,
     required this.title,
     required this.subtitle,
     required this.image,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

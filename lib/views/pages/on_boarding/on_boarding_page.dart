@@ -25,20 +25,66 @@ class OnBoardingPage extends StatelessWidget {
         init: OnBoardingController(),
         builder: (OnBoardingController onBoardingController) {
           return Scaffold(
-            backgroundColor: AppColors.appBackgroundColor,
-            appBar: AppBar(
-              backgroundColor: AppColors.appBackgroundColor,
-              leading: Obx(
-                    () => onBoardingController.selectedPage.value == 0
-                    ? const SizedBox()
-                    : IconButton(
-                    onPressed: () {
-                      onBoardingController.previousPage();
-                    }, icon: SvgPicture.asset(AppIcons.ic_back,
-                        color: Colors.black),
+            backgroundColor: Colors.white,
+            appBar: PreferredSize(
+                preferredSize: const Size.fromHeight(56),
+                child: Container(
+                  color: Colors.white,
+                  child: SafeArea(
+                    child: Center(
+                      child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
+                          child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Obx(
+                                  () => Text.rich(TextSpan(
+                                      text: (onBoardingController
+                                                  .selectedPage.value +
+                                              1)
+                                          .toString(),
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyMedium
+                                          ?.copyWith(
+                                              fontSize: AppConsts
+                                                      .commonFontSizeFactor *
+                                                  18,
+                                              color: Colors.black,
+                                              fontWeight: FontWeight.w600),
+                                      children: [
+                                        TextSpan(
+                                            text: "/3",
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .bodyMedium
+                                                ?.copyWith(
+                                                    fontSize: AppConsts
+                                                            .commonFontSizeFactor *
+                                                        18,
+                                                    color:
+                                                        AppColors.color_AO_A1,
+                                                    fontWeight:
+                                                        FontWeight.w600))
+                                      ])),
+                                ),
+                                GestureDetector(
+                                  child: Text('skip'.tr,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyMedium
+                                          ?.copyWith(
+                                              fontSize: AppConsts
+                                                      .commonFontSizeFactor *
+                                                  18,
+                                              color: Colors.black,
+                                              fontWeight: FontWeight.w600)),
+                                )
+                              ])),
                     ),
-              ),
-            ),
+                  ),
+                )),
             body: Column(
               mainAxisSize: MainAxisSize.max,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -75,9 +121,8 @@ class OnBoardingPage extends StatelessWidget {
                   height: 10,
                   margin: const EdgeInsets.only(left: 8),
                   child: Obx(
-                        () => PageIndicator(
-                        selectedIndex:
-                        onBoardingController.selectedPage.value,
+                    () => PageIndicator(
+                        selectedIndex: onBoardingController.selectedPage.value,
                         length: 3),
                   ),
                 ),
@@ -85,7 +130,7 @@ class OnBoardingPage extends StatelessWidget {
                   height: 32,
                 ),
                 Obx(
-                      () => CommonButton(
+                  () => CommonButton(
                       text: onBoardingController.selectedPage.value < 2
                           ? 'next'
                           : 'sign_up',
@@ -99,36 +144,32 @@ class OnBoardingPage extends StatelessWidget {
                 Center(
                   child: RichText(
                       text: TextSpan(children: [
-                        TextSpan(
-                            text: 'already_have_account'.tr,
-                            style: Theme.of(context)
-                                .textTheme
-                                .headlineSmall
-                                ?.copyWith(
+                    TextSpan(
+                        text: 'already_have_account'.tr,
+                        style: Theme.of(context)
+                            .textTheme
+                            .headlineSmall
+                            ?.copyWith(
                                 color: Colors.black.withOpacity(0.6),
-                                fontSize:
-                                AppConsts.commonFontSizeFactor * 12)),
-                        const WidgetSpan(
-                            child: SizedBox(
-                              width: 4,
-                            )),
-                        TextSpan(
-                            text: 'sign_in'.tr,
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodySmall
-                                ?.copyWith(
+                                fontSize: AppConsts.commonFontSizeFactor * 12)),
+                    const WidgetSpan(
+                        child: SizedBox(
+                      width: 4,
+                    )),
+                    TextSpan(
+                        text: 'sign_in'.tr,
+                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
                               color: AppColors.kPrimaryColor,
                               fontWeight: FontWeight.w600,
                               fontSize: AppConsts.commonFontSizeFactor * 12,
                             ),
-                            recognizer: TapGestureRecognizer()
-                              ..onTap = () {
-                                PreferenceManager.save2Pref(
-                                    PreferenceManager.prefIsFirstLaunch, false);
-                                Get.offAllNamed(AppRoutes.routeLogin);
-                              })
-                      ])),
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () {
+                            PreferenceManager.save2Pref(
+                                PreferenceManager.prefIsFirstLaunch, false);
+                            Get.offAllNamed(AppRoutes.routeLogin);
+                          })
+                  ])),
                 ),
                 Center(
                   child: TextButton(
@@ -153,6 +194,67 @@ class OnBoardingPage extends StatelessWidget {
                   height: 8,
                 )
               ],
+            ),
+            bottomNavigationBar: Container(
+              color: Colors.white,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const SizedBox(height: 22),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: Stack(
+                      children: [
+                        Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            GestureDetector(
+                                child: Text(
+                              "prev".tr,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyMedium
+                                  ?.copyWith(
+                                      fontWeight: FontWeight.w600,
+                                      fontSize:
+                                          AppConsts.commonFontSizeFactor * 18,
+                                      color: AppColors.color_C4),
+                            )),
+                            GestureDetector(
+                                child: Text(
+                              "next".tr,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyMedium
+                                  ?.copyWith(
+                                      fontWeight: FontWeight.w600,
+                                      fontSize:
+                                          AppConsts.commonFontSizeFactor * 18),
+                            ))
+                          ],
+                        ),
+                        Positioned.fill(
+                          child: Align(
+                            alignment: Alignment.center,
+                            child: Container(
+                              height: 10,
+                              margin: const EdgeInsets.only(left: 8),
+                              child: Obx(
+                                () => PageIndicator(
+                                    selectedIndex:
+                                        onBoardingController.selectedPage.value,
+                                    length: 3),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 22)
+                ],
+              ),
             ),
           );
         });

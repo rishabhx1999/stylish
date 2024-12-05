@@ -22,6 +22,8 @@ class LocalStrings extends Translations {
               'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.',
           'on_boarding_subtitle_3':
               'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.',
+          'skip': 'Skip',
+          'prev': 'Prev',
           'next': 'Next',
           'sign_up': 'Sign Up',
           'already_have_account': 'Already have an account?',
